@@ -1,0 +1,28 @@
+<div class="absolute max-h-full right-6 overflow-scroll scroll-smooth">
+    <div *ngFor="let toast of toasts; let i=index">
+        <div *ngIf="toast.type == 0" class="shadow-xl flex items-center min-w-[13rem] max-w-[15rem] sm:max-w-[21rem] md:max-w-[24rem] min-h-[4rem] p-2 m-4 rounded-t-lg rounded-b-lg z-20 text-red-700 fixed -right-60 bg-white font-bold" [ngClass]="getAnimeStyles(i)">
+            <div class="p-3">
+                <span class="material-symbols-outlined text-3xl">
+                    error
+                </span>
+            </div>
+            <div class="p-3">{{toast.message}}</div>
+        </div>
+        <div *ngIf="toast.type == 1" class="shadow-xl flex items-center min-w-[13rem] max-w-[15rem] sm:max-w-[21rem] md:max-w-[24rem] min-h-[4rem] p-2 m-4 rounded-t-lg rounded-b-lg z-20 text-gree-700 fixed -right-60 bg-white font-bold" [ngClass]="getAnimeStyles(i)">
+            <div class="p-3">
+                <span class="material-symbols-outlined text-3xl">
+                    done
+                </span>
+            </div>
+            <div class="p-3">{{toast.message}}</div>
+        </div>
+        <div *ngIf="toast.type == 2" class="shadow-xl flex items-center min-w-[13rem] max-w-[15rem] sm:max-w-[21rem] md:max-w-[24rem] min-h-[4rem] p-2 m-4 rounded-t-lg rounded-b-lg z-20 text-blue-700 fixed -right-60 bg-white font-bold" [ngClass]="getAnimeStyles(i)">
+            <div class="p-3">
+                <span class="material-symbols-outlined text-3xl">
+                    info
+                </span>
+            </div>
+            <div class="p-3">{{toast.message}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<toast [message]="toast"></toast>
+<div class="bg-black h-screen flex items-center justify-center">
+    <div class="">
+        <div class="p-3 font-bold text-2xl text-green-300 text-center sm:text-3xl md:text-4xl lg:text-5xl">
+            <span>{{title}}</span>
+            <p class="text-base text-white sm:text-lg md:text-xl lg:text-2xl">{{subTitle}}</p>
+        </div>
+        <div class="p-3 m-4 flex items-start justify-center">
+            <search-input type="text" [form]="user.user_name" label="Username" (keyup.enter)="onSearch()"></search-input>
+            <button class="flex items-center bg-orange-600 text-white px-5 py-4 mt-0 m-2  rounded-t rounded-b font-bold text-3xl" matTooltip='Click!' mat-raised-button (click)="onSearch()" ><span class="text-base btn-txt">Search</span></button>
+        </div>
+    </div>
+</div>

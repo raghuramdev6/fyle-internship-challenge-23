@@ -1,0 +1,91 @@
+<toast [message]="toast"></toast>
+<dialog-box class="flex" (dialogClosed)="dislogClosed()" #dialogBox>
+    <p>{{dialogBoxTitle}}</p>
+    <div class="p-3 m-4 flex items-start justify-center">
+        <search-input type="text" [form]="userRepoModel.per_page" label="Per Page" (keyup.enter)="setPerPage()"></search-input>
+        <button class="flex items-center bg-orange-600 text-white px-5 py-4 mt-0 m-2  rounded-t rounded-b font-bold text-3xl" matTooltip='Click!' mat-raised-button (click)="setPerPage()" ><span class="text-base btn-txt">Submit</span></button>
+    </div>
+</dialog-box>
+
+<div class="bg-blue-100 m-4 p-4 drop-shadow-xl rounded-xl shadow relative">
+    <button type="button" class="absolute top-1 end-2.5 text-gray-400 bg-transparent hover:bg-gray-400 hover:text-gray-50 rounded-xl text-sm ms-auto inline-flex justify-center items-center dark:hover:bg-gray-400 dark:hover:text-gray-50"
+        (click)="show()">
+        <span class="material-symbols-outlined">
+            more_horiz
+        </span>
+    </button>
+    <!-- skeleteon loader block 1 Begin -->
+    <div *ngIf="loader" class="animate-pulse">
+        <div class="text-center p-4 sm:inline-block">
+            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full bg-slate-400 m-auto">
+            </div>
+            <div class="mt-3 h-3 w-44 bg-slate-400 m-auto rounded"></div>
+        </div>
+        <div class="p-4 sm:inline-block sm:align-top">
+            <div class="mt-3 h-3 w-48 bg-slate-400 rounded"></div>
+            <div class="mt-3 h-3 w-44 bg-slate-400 rounded"></div>
+            <div class="mt-3 h-3 w-40 bg-slate-400 rounded"></div>
+            <div class="mt-3 h-3 w-44 bg-slate-400 rounded"></div>
+        </div>
+    </div>
+    <!-- skeleteon loader block 1 End -->
+
+    <div *ngIf="!loader">
+        <div class="text-center p-4 sm:inline-block">
+            <div class="w-40 h-40 md:w-48 md:h-48 rounded-full m-auto">
+                <a>
+                    <img class="w-full h-full rounded-full outline-2 outline-dashed outline-red-400 outline-offset-4" [src]="gitHubUser.avatar_url">
+                </a>
+            </div>
+            <p class="inline-grid grid-flow-col-dense items-center p-4 sm:pt-4"><span class="material-symbols-outlined pr-2">link</span> <a class="hover:text-blue-600" [href]="gitHubUser.html_url">{{gitHubUser.html_url}}</a></p>
+        </div>
+        <div class="p-4 sm:inline-block sm:align-top">
+            <h1 class="text-3xl" *ngIf="gitHubUser.name">{{gitHubUser.name}}</h1>
+            <p class="text-sm pt-3" *ngIf="gitHubUser.bio">{{gitHubUser.bio}}</p>
+            <p class="inline-grid grid-flow-col-dense items-center text-sm pt-3" *ngIf="gitHubUser.location">
+                <span class="material-symbols-outlined">
+                    location_on
+                </span>
+                {{gitHubUser.location}}
+            </p>
+            <p class="text-sm pt-3" *ngIf="gitHubUser.twitter_username">Twitter: <a class="hover:text-blue-600 hover:underline " href="https://twitter.com/{{gitHubUser.twitter_username}}">https://twitter.com/{{gitHubUser.twitter_username}}</a></p>
+        </div>
+    </div>
+
+    <hr class="border-t border-solid border-stone-400 mb-2">
+    <!-- skeleteon loader block 2 Begin-->
+    <div  *ngIf="loader" class="animate-pulse md:grid md:grid-cols-2 md:gap-y-3 md:gap-x-5 lg:grid-cols-3 lg:gap-y-3 lg:gap-x-6">
+        <div class="p-3 border-slate-600 border-solid border rounded mb-2 md:w-auto md:mb-0" *ngFor="let repos of [1,2,3,4,5,6,7,8,9,0]">
+            <div class="h-3.5 bg-slate-400 w-28 rounded"></div>
+            <div class="mt-3 h-2 bg-slate-400 rounded"></div>
+            <div class="mt-2 h-2 bg-slate-400 rounded"></div>
+            <div class="mt-3 h-2 bg-slate-400 rounded w-36"></div>
+            <p class="text-sm pt-3"></p>
+            <div class="text-sm mt-2">
+                <div class="inline-block w-8 h-4 p-1.5 bg-slate-400 rounded mt-2 mr-2 " *ngFor="let topic of [1,2]"></div>
+            </div>
+        </div>
+    </div>
+    <!-- skeleteon loader block 2 End -->
+
+    <div *ngIf="!loader && userRepoList.length>0" class="md:grid md:grid-cols-2 md:gap-y-3 md:gap-x-5 lg:grid-cols-3 lg:gap-y-3 lg:gap-x-6">
+        <div class="p-3 border-slate-600 border-solid border rounded mb-2 md:w-auto md:mb-0" *ngFor="let repos of userRepoList">
+            <h1 class="text-2xl text-blue-500">{{repos.name}}</h1>
+            <p class="text-sm pt-3 truncate">{{repos.description}}</p>
+            <div class="text-sm mt-2">
+                <ng-template ngFor let-topic [ngForOf]="repos.topics" let-i="index">
+                    <div class="inline-block p-1.5 rounded bg-blue-700 text-white mt-2 mr-2" *ngIf="i<6">{{topic}}</div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!(userRepoList.length>0) && !loader" class="text-center">
+        <span class=" flex p-3 h-32 items-center justify-center text-3xl text-gray-300">
+            No Repositories Found
+        </span>
+    </div>
+    <hr class="border-t border-solid border-stone-400 mt-2">
+    <div class="mt-2" *ngIf="userRepoList.length>0">
+        <pagination [currentPage]="currentPage" [perPage]="perPage" [totalRec]="totalRec" [totalPagesToDispaly]="totalPagesToDispaly" (changedPage)="pageChanged($event)"></pagination>
+    </div>
+</div>

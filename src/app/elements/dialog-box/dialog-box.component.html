@@ -1,0 +1,21 @@
+<div *ngIf="showBox" class="flex items-center justify-center fixed w-full h-full thin bg-black z-30 opacity-70"></div>
+
+<div *ngIf="showBox" class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-white">
+            <button type="button" class="absolute end-2.5 text-red-400 bg-transparent hover:bg-red-200 hover:text-white rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-red-600 dark:hover:text-white"
+                (click)="close()">
+                <span class="material-symbols-outlined">
+                    cancel
+                </span>
+            </button>
+            <div class="pt-8 text-center">
+                <div class="p-4 mt-3">
+                    <ng-content>
+
+                    </ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

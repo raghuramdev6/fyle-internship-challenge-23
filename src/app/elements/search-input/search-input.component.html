@@ -1,0 +1,5 @@
+<mat-form-field class="col h-full" appearance="fill">
+	<mat-label>{{label}}</mat-label>
+        <input [type]="type" matInput [(ngModel)]="form.value" (ngModelChange)="form.valueChanged()" [required]="form.isMandatory()" [readonly]="form.isReadonly()"  placeholder="{{label}}" tabindex="{{tabindex}}" [disabled]="form.isDisabled()">
+		<mat-error *ngIf="!form.valid" [innerHTML]="form.errorMessage"></mat-error>
+</mat-form-field>
