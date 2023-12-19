@@ -25,6 +25,8 @@ export class UserRepoListComponent implements OnInit {
     toast!: ToastData;
     dialogBoxTitle = "Please number of repository to display per page";
     userRepoModel!: UserReposModel;
+    dummyRepolist = new Array(10);
+    dummyRepoTopics = new Array(2);
 
     constructor(private apiService: ApiService, private contextSerice: ContextSevice, private route: Router){
         this.userRepoModel = new UserReposModel();

@@ -1,29 +1,42 @@
 <div class="m-auto w-fit">
     <ul class="flex justify-center">
-        <li class="inline-block px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-tl rounded-l"
-        (click)="previousPage()">
-            <span> << </span>
+        <li class="flex items-center px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-tl rounded-l"
+        [ngClass]="getPreviousDiabledStyle()" (click)="previousPage()">
+            <span class="material-symbols-outlined text-base">
+                keyboard_double_arrow_left
+            </span>
         </li>
-        <li [ngClass]="getStyleClasses(p)" class="inline-block px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400"
+        <li [ngClass]="getStyleClasses(p)" class="flex items-center px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400"
             *ngFor="let p of pages" (click)="pageChanged(p)" [ngStyle]="getStyles(p)">
             <span>{{p}}</span>
         </li>
-        <li class="inline-block px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-tr rounded-r"
-        (click)="nextPage()">
-            <span>>></span>
+        <li class="flex items-center px-1.5 mr-px border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-tr rounded-r"
+        [ngClass]="getNextDiabledStyle()" (click)="nextPage()">
+            <span class="material-symbols-outlined text-base">
+                keyboard_double_arrow_right
+            </span>
         </li>
     </ul>
     <ul class="grid grid-cols-3 mt-4">
-        <li class="inline-block px-2 border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-full text-center"
+        <li [ngClass]="getPreviousDiabledStyle()" class="inline-block px-2 border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-full text-center"
         (click)="startPage()">
-            <span><-- Older </span>
+            <div class="flex items-center">
+                <span class="material-symbols-outlined text-lg">
+                    keyboard_backspace
+                </span>
+                <span class="text-base">Older</span>
+            </div>
         </li>
         <div>
-            <!-- <input type="number" [value]="perPage"> -->
         </div>
-        <li class="inline-block px-2 border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-full text-center"
+        <li [ngClass]="getNextDiabledStyle()" class="inline-block px-2 border border-solid border-slate-400 text-blue-600 hover:cursor-pointer hover:text-white hover:bg-blue-400 rounded-full text-center"
         (click)="lastPage()">
-            <span>Newer --></span>
+            <div class="flex items-center justify-center">
+                <span class="text-base">Newer</span>
+                <span class="material-symbols-outlined text-lg rotate-180">
+                    keyboard_backspace
+                </span>
+            </div>
         </li>
     </ul>
 </div>

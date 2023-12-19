@@ -12,3 +12,7 @@ Run `ng serve` for a dev server. Navigate to http://localhost:4200/. The app wil
 ### Test server
 
 Run `ng test` and wait till it complete the browser application bundle generation. It will automatically launch chrome browsers.
+
+### Assumption
+1. Pagenavigation Action: Clicking on Older and Newer button will display the first page and last repository page detail respectively.
+2. To change `Per Page` value, User will click on more option provided at the top-right corner of profile card.

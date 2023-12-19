@@ -43,27 +43,31 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
 
     previousPage(){
-        if(!(this.pages.length == 0 || this.currentPage<=this.pages[0])){
+        if(!(this.pages.length == 0 || this.currentPage<=this.pages[0]) && (this.currentPage != this.pages[0])){
             this.currentPage--;
             this.emitPageChange();
         }
     }
 
     nextPage(){
-        if(!(this.pages.length == 0 || this.currentPage>=this.pages.length)){
+        if(!(this.pages.length == 0 || this.currentPage>=this.pages.length) && !(this.currentPage == this.pages[this.pages.length-1])){
             this.currentPage++;
             this.emitPageChange();
         }
     }
 
     startPage(){
-        this.currentPage = this.pages[0];
-        this.emitPageChange();
+        if(this.pages.length != 0 && this.currentPage != this.pages[0]){
+            this.currentPage = this.pages[0];
+            this.emitPageChange();
+        }
     }
 
     lastPage(){
-        this.currentPage = this.pages[this.pages.length-1];
-        this.emitPageChange();
+        if(this.pages.length != 0 && this.currentPage != this.pages[this.pages.length-1]){
+            this.currentPage = this.pages[this.pages.length-1];
+            this.emitPageChange();
+        }
     }
 
     emitPageChange(){
@@ -86,6 +90,21 @@ export class PaginationComponent implements OnInit, OnChanges {
     getStyleClasses(page: number){
         if(page === this.currentPage){
             return 'bg-blue-600 !text-white';
+        }
+        return '';
+    }
+
+    getPreviousDiabledStyle(){
+        if(this.pages.length != 0 && this.currentPage == this.pages[0]){
+            return 'hover:cursor-not-allowed hover:!text-blue-600 hover:bg-blue-100'
+        }
+
+        return '';
+    }
+
+    getNextDiabledStyle(){
+        if(this.pages.length != 0 && this.currentPage == this.pages[this.pages.length-1]){
+            return 'hover:cursor-not-allowed hover:!text-blue-600 hover:bg-blue-100'
         }
         return '';
     }
